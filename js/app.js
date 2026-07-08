@@ -10,8 +10,8 @@ const page = {
 function attachEventListners() {
     for (const link of page.nav_links) {
         link.addEventListener('click', (e) => {
-            console.log(link.dataset.file);
             e.preventDefault();
+            localStorage.setItem('page_content', link.dataset.file)
             getContent(link.dataset.file, page.content_placeholder);
         })
     }
@@ -33,8 +33,12 @@ function getContent(path, placeholder) {
         });
 }
 
+function findPageContent() {
+    return localStorage.getItem('page_content') || "home";
+}
+
 getContent("title", page.title_placeholder);
-getContent("home", page.content_placeholder);
+getContent(findPageContent(), page.content_placeholder);
 getContent("nav", page.menu_placeholder)
     .then(data => {
         attachEventListners();
