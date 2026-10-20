@@ -1,71 +1,200 @@
+/* ==========================================
+   Modern CSS Reset & Variables
+   ========================================== */
+:root {
+    --primary-color: #0f172a;        /* Deep Slate */
+    --accent-blue: #2563eb;          /* Modern Blue */
+    --sidebar-bg: #1e293b;           /* Dark Sidebar */
+    --sidebar-hover: #334155;        /* Sidebar Hover */
+    --bg-main: #f8fafc;              /* Soft Light Background */
+    --text-main: #334155;            /* Readable Dark Text */
+    --text-light: #f8fafc;           /* Light Text */
+    --border-color: #e2e8f0;         /* Subtle Border */
+    --transition-speed: 0.2s ease;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-size: 16px;
-    font-family: Montserrat, sans-serif;
-    /*font-family: Monospaced, Menlo, Monaco, Consolas, "Courier New", monospace;*/
 }
 
+body {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================
+   Layout (Grid Structure)
+   ========================================== */
 .parent {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(10, 1fr);
-    grid-column-gap: 0;
-    grid-row-gap: 0;
+    grid-template-columns: 260px 1fr;
+    grid-template-rows: 70px 1fr;
+    min-height: 100vh;
 }
 
-.div1 { grid-area: 1 / 1 / 2 / 13; }
-.div2 { grid-area: 2 / 1 / 11 / 3; }
-.div3 { grid-area: 2 / 3 / 11 / 13; }
-
-h1 {
-    font-size: 2rem;
-    padding: 1em;
-    color: whitesmoke;
-    background-color: #2D89CC;
+/* Header Area */
+.div1 {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    z-index: 10;
 }
 
-h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-p {
-    line-height: 1.5;
-    padding: 1rem;
-}
-
+/* Sidebar Navigation Area */
 .div2 {
-    background-color: #32A399;
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    background-color: var(--sidebar-bg);
+    padding: 2rem 0;
 }
 
+/* Main Content Area */
 .div3 {
-    padding: 1em;
-    background-color: #EFF7FE;
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    padding: 2.5rem;
+    background-color: var(--bg-main);
+    overflow-y: auto;
 }
 
-.list {
-    padding: 1rem 2rem
-}
-
-.list li {
-    padding: .5rem;
-}
-
-nav > ul > li {
-    padding: .4em 1em;
-}
-
-nav > ul > li:hover, .active {
-    background-color: #19514c;
-}
-
-nav > ul > li > a {
-    color: whitesmoke;
-    text-decoration: none;
+/* ==========================================
+   Header & Logo Styling
+   ========================================== */
+h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    background: none;
+    padding: 0;
 }
 
 .floating-right {
-    float: right;
+    height: 35px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* ==========================================
+   Navigation Styling
+   ========================================== */
+nav ul {
+    list-style: none;
+}
+
+nav > ul > li {
+    padding: 0;
+    margin: 0.25rem 1rem;
+}
+
+nav > ul > li > a {
+    display: block;
+    color: #94a3b8;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    transition: all var(--transition-speed);
+}
+
+nav > ul > li > a:hover,
+nav > ul > li.active > a,
+.active {
+    background-color: var(--sidebar-hover);
+    color: var(--text-light);
+}
+
+/* ==========================================
+   Content Elements & Typography
+   ========================================== */
+h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: var(--border-color);
+    margin-bottom: 1.5rem;
+}
+
+p {
+    line-height: 1.6;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    color: #475569;
+}
+
+/* Lists and Links Cards */
+.list {
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.list ul {
+    list-style: none;
+}
+
+.list li {
+    padding: 0;
+}
+
+.list li a {
+    display: inline-block;
+    background-color: #ffffff;
+    color: var(--accent-blue);
+    padding: 0.75rem 1.25rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all var(--transition-speed);
+}
+
+.list li a:hover {
+    background-color: var(--accent-blue);
+    color: #ffffff;
+    border-color: var(--accent-blue);
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.15);
+    transform: translateY(-1px);
+}
+
+/* ==========================================
+   Responsive Design for Small Screens
+   ========================================== */
+@media (max-width: 768px) {
+    .parent {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr;
+    }
+
+    .div1 {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+    }
+
+    .div2 {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+        padding: 1rem;
+    }
+
+    .div3 {
+        grid-column: 1 / 2;
+        grid-row: 3 / 4;
+        padding: 1.5rem;
+    }
 }
